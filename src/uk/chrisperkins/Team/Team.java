@@ -24,7 +24,6 @@ public class Team<T extends Player<T>> implements Ranked, Comparable<T> {
         this.players = new ArrayList<Player<T>>();
     }
 
-
     // == HELPER METHODS ==
 
     public String getTeamName() {
@@ -76,6 +75,10 @@ public class Team<T extends Player<T>> implements Ranked, Comparable<T> {
         return (played - (won + lost));
     }
 
+    public int getNumPlayera() {
+        return  this.players.size();
+    }
+
     public void genStats() {
         int max = 10;
         int min = 0;
@@ -114,7 +117,7 @@ public class Team<T extends Player<T>> implements Ranked, Comparable<T> {
      * @param player
      * @return
      */
-    public boolean remove(Player<Player> player) {
+    public boolean remove(Player<T> player) {
 
         boolean leftTeam = false;
 
@@ -129,7 +132,6 @@ public class Team<T extends Player<T>> implements Ranked, Comparable<T> {
         }
         return leftTeam;
     }
-
 
     // == INTERFACE METHODS ==
 

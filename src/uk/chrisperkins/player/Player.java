@@ -4,7 +4,7 @@ import uk.chrisperkins.Ranked;
 
 import java.util.Random;
 
-public abstract class Player<T extends Player> implements Ranked, Comparable {
+public abstract class Player<T> implements Ranked, Comparable<T> {
 
     // == FIELDS ==
     private String name;
@@ -80,9 +80,10 @@ public abstract class Player<T extends Player> implements Ranked, Comparable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Player<T> player = (Player<T>) o;
+        Player<?> player = (Player<?>) o;
 
         if (numGames != player.numGames) return false;
+        if (pointsScored != player.pointsScored) return false;
         return name != null ? name.equals(player.name) : player.name == null;
     }
 
@@ -90,11 +91,12 @@ public abstract class Player<T extends Player> implements Ranked, Comparable {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + numGames;
+        result = 31 * result + pointsScored;
         return result;
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(T o) {
 
         Player<T> player = (Player<T>) o;
 
